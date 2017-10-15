@@ -83,6 +83,16 @@ Histogram of Oriented Gradient (HOG) is an effective method to capture the gradi
 
 The code for this step is contained in the code cells [8]-[9] of [`Vehicle Detection.ipynb`](https://github.com/YuxingLiu/CarND-Vehicle-Detection/blob/master/Vehicle%20Detection.ipynb).  
 
+| Parameters        | Value   | 
+|:-----------------:|:-------:| 
+| Color space       | YCrCb   | 
+| Color hist bins   | 64      |
+| Spatial bin size  | (8, 8)  |
+| 'orientations'    | 9       |
+| 'pix_per_cell'    | (16, 16)|
+| 'cell_per_block'  | (2, 2)  |
+
+
 ## Hog Sub-sampling Window Search
 
 The code for this step is contained in the code cells [10]-[12] of [`Vehicle Detection.ipynb`](https://github.com/YuxingLiu/CarND-Vehicle-Detection/blob/master/Vehicle%20Detection.ipynb).  
