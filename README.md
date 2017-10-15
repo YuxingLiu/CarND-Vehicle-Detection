@@ -25,16 +25,14 @@ Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/5
 [image3]: ./output_images/color_hist_car2.png "Color Histograms Car 2"
 [image4]: ./output_images/color_hist_noncar1.png "Color Histograms Not-car 1"
 [image5]: ./output_images/color_hist_noncar2.png "Color Histograms Not-car 2"
-
 [image6]: ./output_images/color_bins_car1.png "Color Binning Car 1"
 [image7]: ./output_images/color_bins_car2.png "Color Binning Car 2"
 [image8]: ./output_images/color_bins_noncar1.png "Color Binning Not-car 1"
 [image9]: ./output_images/color_bins_noncar2.png "Color Binning Not-car 2"
-
-
-[image10]: ./output_images/hog1.png "HOG 1"
-[image11]: ./output_images/hog2.png "HOG 2"
-
+[image10]: ./output_images/hog_car1.png "HOG Car 1"
+[image11]: ./output_images/hog_car2.png "HOG Car 2"
+[image12]: ./output_images/hog_noncar1.png "HOG Not-car 1"
+[image13]: ./output_images/hog_noncar2.png "HOG Not-car 2"
 [image14]: ./output_images/search_heat1.png "Window Search 1"
 [image15]: ./output_images/search_heat2.png "Window Search 2"
 
@@ -76,6 +74,10 @@ The code for this step is contained in the code cells [6]-[7] of [`Vehicle Detec
 
 Histogram of Oriented Gradient (HOG) is an effective method to capture the gradient features of various shapes, hence widely used in object detection. I use [`hog()`](http://scikit-image.org/docs/dev/api/skimage.feature.html?highlight=feature%20hog#skimage.feature.hog) function in [scikit-image](http://scikit-image.org/) package to calculate the HOG features. Here are HOG examples of vehicle and non-vehicle, on `YCrCb` color space with `orientations=9`, `pix_per_cell=8`, `cell_per_block=2`, and `transform_sqrt=True`:
 
+![alt text][image10]
+![alt text][image11]
+![alt text][image12]
+![alt text][image13]
 
 ### Linear SVC Training
 
