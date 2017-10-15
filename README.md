@@ -25,10 +25,10 @@ Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/5
 [image3]: ./output_images/color_hist_car2.png "Color Histograms Car 2"
 [image4]: ./output_images/color_hist_noncar1.png "Color Histograms Not-car 1"
 [image5]: ./output_images/color_hist_noncar2.png "Color Histograms Not-car 2"
-[image6]: ./output_images/color_bins_car1.png "Color Binning Car 1"
-[image7]: ./output_images/color_bins_car2.png "Color Binning Car 2"
-[image8]: ./output_images/color_bins_noncar1.png "Color Binning Not-car 1"
-[image9]: ./output_images/color_bins_noncar2.png "Color Binning Not-car 2"
+[image6]: ./output_images/color_bins_car1.png "Spatial Bins Car 1"
+[image7]: ./output_images/color_bins_car2.png "Spatial Bins Car 2"
+[image8]: ./output_images/color_bins_noncar1.png "Spatial Bins Not-car 1"
+[image9]: ./output_images/color_bins_noncar2.png "Spatial Bins Not-car 2"
 [image10]: ./output_images/hog_car1.png "HOG Car 1"
 [image11]: ./output_images/hog_car2.png "HOG Car 2"
 [image12]: ./output_images/hog_noncar1.png "HOG Not-car 1"
@@ -61,7 +61,7 @@ Color histograms can be helpful for looking at car vs non-car images. I use `np.
 ![alt text][image4]
 ![alt text][image5]
 
-Spatially binnned images still retain enough information to help in finding vehicles. I use `cv2.resize()` to calcuate the spatial binned features. Here are spatial binned examples of vehicle and non-vehicle, on `YCrCb` color space with 8x8 pixel resolution on each color channel:
+Spatially binned images still retain enough information to help in finding vehicles. I use `cv2.resize()` to calculate the spatial bin features. Here are spatial bin examples of vehicle and non-vehicle, on `YCrCb` color space with 8x8 pixel resolution on each color channel:
 
 ![alt text][image6]
 ![alt text][image7]
