@@ -18,8 +18,15 @@ Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/5
 
 [//]: # (Image References)
 
-[image1]: ./output_images/example_car_noncar.png "Camera Calibration"
-
+[image1]: ./output_images/example_car_noncar.png "Data Visualization"
+[image2]: ./output_images/color_hist1.png "Color Histograms 1"
+[image3]: ./output_images/color_hist2.png "Color Histograms 2"
+[image4]: ./output_images/color_bins1.png "Color Binning 1"
+[image5]: ./output_images/color_bins2.png "Color Binning 2"
+[image6]: ./output_images/hog1.png "HOG 1"
+[image7]: ./output_images/hog2.png "HOG 2"
+[image8]: ./output_images/search_heat1.png "Window Search 1"
+[image9]: ./output_images/search_heat2.png "Window Search 2"
 
 ---
 
@@ -37,16 +44,39 @@ For this project, a labeled dataset of 8792 [vehicles](https://s3.amazonaws.com/
 
 ### Color Histograms and Spatial Binned Color Features
 
+The code for this step is is contained in the code cells [4]-[5] of [`Vehicle Detection.ipynb`](https://github.com/YuxingLiu/CarND-Vehicle-Detection/blob/master/Vehicle%20Detection.ipynb).  
+
+Color histograms:
+
+![alt text][image2]
+![alt text][image3]
+
+Color bins:
+
+![alt text][image4]
+![alt text][image5]
 
 ### Histogram of Oriented Gradients (HOG) Features
 
+The code for this step is is contained in the code cells [6]-[7] of [`Vehicle Detection.ipynb`](https://github.com/YuxingLiu/CarND-Vehicle-Detection/blob/master/Vehicle%20Detection.ipynb).  
+
+![alt text][image6]
+![alt text][image7]
 
 ### Linear SVC Training
 
+The code for this step is is contained in the code cells [8]-[9] of [`Vehicle Detection.ipynb`](https://github.com/YuxingLiu/CarND-Vehicle-Detection/blob/master/Vehicle%20Detection.ipynb).  
 
 ## Hog Sub-sampling Window Search
 
+The code for this step is is contained in the code cells [10]-[12] of [`Vehicle Detection.ipynb`](https://github.com/YuxingLiu/CarND-Vehicle-Detection/blob/master/Vehicle%20Detection.ipynb).  
+
+![alt text][image8]
+![alt text][image9]
+
 ## Video Implementation
+
+The code for this step is is contained in the code cells [13]-[16] of [`Vehicle Detection.ipynb`](https://github.com/YuxingLiu/CarND-Vehicle-Detection/blob/master/Vehicle%20Detection.ipynb).  
 
 Here's a link to [project video result](./test_videos_output/project_video.mp4).
 
