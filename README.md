@@ -3,6 +3,8 @@
 
 This repository presents an image processing pipeline to identify vehicles in a video from a front-facing camera on a car.
 
+![](./output_images/project.gif)
+
 ---
 
 The goals / steps of this project are the following:
