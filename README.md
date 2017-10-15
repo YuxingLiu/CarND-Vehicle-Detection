@@ -56,14 +56,14 @@ For this project, a labeled dataset of 8792 [vehicles](https://s3.amazonaws.com/
 
 The code for this step is contained in the code cells [4]-[5] of [`Vehicle Detection.ipynb`](https://github.com/YuxingLiu/CarND-Vehicle-Detection/blob/master/Vehicle%20Detection.ipynb).  
 
-Color histogram features can be helpful for looking at car vs non-car images. I use `np.histogram()` to calculate the color histograms, on `YCrCb` color space with 64 bins on a single channel. Here are color histograms examples of vehicle and non-vehicle:
+Color histograms can be helpful for looking at car vs non-car images. I use `np.histogram()` to calculate the color histogram features. Here are color histograms examples of vehicle and non-vehicle, on `YCrCb` color space with 64 bins on each color channel:
 
 ![alt text][image2]
 ![alt text][image3]
 ![alt text][image4]
 ![alt text][image5]
 
-Spatially binnned images still retain enough information to help in finding vehicles. I use `cv2.resize()` to calcuate the spatial bins, on `YCrCb` color space with 8x8 pixel resolution. Here are spatial binned examples of vehicle and non-vehicle:
+Spatially binnned images still retain enough information to help in finding vehicles. I use `cv2.resize()` to calcuate the spatial binned features. Here are spatial binned examples of vehicle and non-vehicle, on `YCrCb` color space with 8x8 pixel resolution on each color channel:
 
 ![alt text][image6]
 ![alt text][image7]
@@ -73,6 +73,8 @@ Spatially binnned images still retain enough information to help in finding vehi
 ### Histogram of Oriented Gradients (HOG) Features
 
 The code for this step is contained in the code cells [6]-[7] of [`Vehicle Detection.ipynb`](https://github.com/YuxingLiu/CarND-Vehicle-Detection/blob/master/Vehicle%20Detection.ipynb).  
+
+Histogram of Oriented Gradient (HOG) is an effective method to capture the gradient features of various shapes, hence widely used in object detection. I use [`hog()`](http://scikit-image.org/docs/dev/api/skimage.feature.html?highlight=feature%20hog#skimage.feature.hog) function in [scikit-image](http://scikit-image.org/) package to calculate the HOG features. Here are HOG examples of vehicle and non-vehicle, on `YCrCb` color space with `orientations=9`, `pix_per_cell=8`, `cell_per_block=2`, and `transform_sqrt=True`:
 
 
 ### Linear SVC Training
