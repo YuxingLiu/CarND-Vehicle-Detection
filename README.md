@@ -26,8 +26,10 @@ Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/5
 [image4]: ./output_images/color_hist_noncar1.png "Color Histograms Not-car 1"
 [image5]: ./output_images/color_hist_noncar2.png "Color Histograms Not-car 2"
 
-[image6]: ./output_images/color_bins1.png "Color Binning 1"
-[image7]: ./output_images/color_bins2.png "Color Binning 2"
+[image6]: ./output_images/color_bins_car1.png "Color Binning Car 1"
+[image7]: ./output_images/color_bins_car2.png "Color Binning Car 2"
+[image8]: ./output_images/color_bins_noncar1.png "Color Binning Not-car 1"
+[image9]: ./output_images/color_bins_noncar2.png "Color Binning Not-car 2"
 
 
 [image10]: ./output_images/hog1.png "HOG 1"
@@ -54,16 +56,19 @@ For this project, a labeled dataset of 8792 [vehicles](https://s3.amazonaws.com/
 
 The code for this step is contained in the code cells [4]-[5] of [`Vehicle Detection.ipynb`](https://github.com/YuxingLiu/CarND-Vehicle-Detection/blob/master/Vehicle%20Detection.ipynb).  
 
-Color histogram features can be helpful for looking at car vs non-car images. I use 'np.histogram()' to calculate the distogram. :
+Color histogram features can be helpful for looking at car vs non-car images. I use `np.histogram()` to calculate the color histograms, on `YCrCb` color space with 64 bins on a single channel. Here are color histograms examples of vehicle and non-vehicle:
 
 ![alt text][image2]
 ![alt text][image3]
 ![alt text][image4]
 ![alt text][image5]
 
-Color bins:
+Spatially binnned images still retain enough information to help in finding vehicles. I use `cv2.resize()` to calcuate the spatial bins, on `YCrCb` color space with 8x8 pixel resolution. Here are spatial binned examples of vehicle and non-vehicle:
 
-
+![alt text][image6]
+![alt text][image7]
+![alt text][image8]
+![alt text][image9]
 
 ### Histogram of Oriented Gradients (HOG) Features
 
