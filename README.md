@@ -83,6 +83,8 @@ Histogram of Oriented Gradient (HOG) is an effective method to capture the gradi
 
 The code for this step is contained in the code cells [8]-[9] of [`Vehicle Detection.ipynb`](https://github.com/YuxingLiu/CarND-Vehicle-Detection/blob/master/Vehicle%20Detection.ipynb).  
 
+Several combinations of color space, color and HOG parameters were explored, and the final values are summarized as follows: 
+
 | Parameters        | Value   | 
 |:-----------------:|:-------:| 
 | Color space       | YCrCb   | 
@@ -92,6 +94,19 @@ The code for this step is contained in the code cells [8]-[9] of [`Vehicle Detec
 | 'pix_per_cell'    | (16, 16)|
 | 'cell_per_block'  | (2, 2)  |
 
+Feature extraction was performed on 17760 samples in the dataset, including 8792 cars and 8968 non-cars. Then, the total 1346 features, which consist of 192 color histogram features, 192 spatial bin features, and 972 HOG features, were normalized using [`sklearn.preprocessing.StandardScaler()`](http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html) method. The 17760 normalized samples were shuffled and split into training and test sets:
+
+```python
+X_train, X_test, y_train, y_test = train_test_split(scaled_X, labels, test_size=0.2, stratify=labels)
+```
+
+where `stratify=labels` ensures that the ratios between cars and non-cars are the same in both training and test sets.
+
+A linear SVM classifier is built and trained using [`sklearn.svm.LinearSVC()`](http://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html). To tune the SVM with a linear kernel, I consider three possible values of the C parameter, `C:[1, 0.1, 0.01]`. It is found that both `C=1` and `C=0.1` yield above 99% test accuracy, while `C=0.01` is about 98.8%. Therefore, `C=0.1` is chosen so that the classifier is more generalizable.
+
+It's worth mentioning that 100% training accuracy can be easily achieve, indicating that 1346 features is enough to classify those 17700 samples perfectly. In other words, using 8460 features as mentioned in the lecture seems to be not helpful, because of such relatively small training set. Although both cases exhibit high test accuracy, they all reported a lot of false positives. For that reason, I keep to use the parameters corresponding to 1346 features, for faster processing speed.
+
+Having chosen the features and SVM hyperparameters, I decided to retrain the classifier on the entire 17760 samples, in order to fully utilize the small training dataset. Hopefully, this move would not cause overfitting, since a relatively large regularization term is used (`C=0.1`).
 
 ## Hog Sub-sampling Window Search
 
