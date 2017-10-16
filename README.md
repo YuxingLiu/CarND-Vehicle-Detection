@@ -102,15 +102,25 @@ X_train, X_test, y_train, y_test = train_test_split(scaled_X, labels, test_size=
 
 where `stratify=labels` ensures that the ratios between cars and non-cars are the same in both training and test sets.
 
-A linear SVM classifier is built and trained using [`sklearn.svm.LinearSVC()`](http://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html). To tune the SVM with a linear kernel, I consider three possible values of the C parameter, `C:[1, 0.1, 0.01]`. It is found that both `C=1` and `C=0.1` yield above 99% test accuracy, while `C=0.01` is about 98.8%. Therefore, `C=0.1` is chosen so that the classifier is more generalizable.
+A linear SVM classifier is built and trained using [`sklearn.svm.LinearSVC()`](http://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html). To tune the SVM with a linear kernel, I consider three possible values of the C parameter, `C={1, 0.1, 0.01}`. It is found that both `C=1` and `C=0.1` yield above 99% test accuracy, while `C=0.01` is about 98.8%. Therefore, `C=0.1` is chosen so that the classifier is more generalizable.
 
-It's worth mentioning that 100% training accuracy can be easily achieve, indicating that 1346 features is enough to classify those 17700 samples perfectly. In other words, using 8460 features as mentioned in the lecture seems to be not helpful, because of such relatively small training set. Although both cases exhibit high test accuracy, they all reported a lot of false positives. For that reason, I keep to use the parameters corresponding to 1346 features, for faster processing speed.
+It's worth mentioning that 100% training accuracy can be achieve, indicating that 1346 features is enough to classify those 17700 samples perfectly. In other words, using 8460 features as mentioned in the lecture seems to be not helpful, because of such relatively small training set. Even though both cases exhibit high test accuracy, they reported a lot of false positives in the video. For this reason, I keep using the parameters corresponding to 1346 features, for faster computation speed.
 
-Having chosen the features and SVM hyperparameters, I decided to retrain the classifier on the entire 17760 samples, in order to fully utilize the small training dataset. Hopefully, this move would not cause overfitting, since a relatively large regularization term is used (`C=0.1`).
+Having chosen the features and SVM hyperparameters, I decided to re-train the classifier on the entire 17760 samples, in order to fully utilize the small dataset. Hopefully, this move would not cause overfitting, since a relatively large regularization term is used (`C=0.1`).
 
-## Hog Sub-sampling Window Search
+## HOG Sub-sampling Window Search
 
 The code for this step is contained in the code cells [10]-[12] of [`Vehicle Detection.ipynb`](https://github.com/YuxingLiu/CarND-Vehicle-Detection/blob/master/Vehicle%20Detection.ipynb).  
+
+An efficient windown shearch approach is adopted, which allows to extracts hog features once (per scale value) and then preform sub-sampling in each window. Multi-scaled search windows are used, whose parameters are shown below:
+
+| Scale | Window Size | y Range   | Overlap |
+|:-----:|:-----------:|:---------:|:-------:| 
+| 1     | (64, 64)    | (380, 508)| 0.75    | 
+| 1.25  | (80, 80)    | (380, 572)| 0.6875  |
+| 1.5   | (96, 96)    | (380, 668)| 0.625   |
+
+
 
 ![alt text][image14]
 ![alt text][image15]
