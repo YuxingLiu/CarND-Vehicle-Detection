@@ -120,6 +120,13 @@ An efficient windown shearch approach is adopted, which allows to extracts hog f
 | 1.25  | (80, 80)    | (380, 572)| 0.6875  |
 | 1.5   | (96, 96)    | (380, 668)| 0.625   |
 
+To reject false positve, an effective way I found is to use [`clf.decision_function()`](http://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC.decision_function) to predict confidence scores for samples, rather than using `clf.predict()` to predcit labels. Similar to the notion of probability, one can costomize the positive detection threshold value, in the sense that only high-confidence detection (like 80% probability) is accounted for.
+In addition, heat-map is used to record multiple detections in an image, and only the "hot" parts of the map are where the cars are. Two threshold values for score and heat-map are chosen as follows:
+
+|       | Threshold |
+|:-----:|:---------:| 
+| Score | 1.0       |
+| Heat  | 2         |
 
 
 ![alt text][image14]
