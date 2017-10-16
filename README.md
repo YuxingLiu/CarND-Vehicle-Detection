@@ -121,7 +121,7 @@ An efficient window shearch approach is adopted, which allows to extracts hog fe
 | 1.5   | (96, 96)    | (380, 668)| 0.625   |
 
 To reject false positives, an effective way I found is to use [`clf.decision_function()`](http://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC.decision_function) to predict confidence scores for samples, rather than using `clf.predict()` to predict labels. Similar to the notion of probability, one can customize the positive detection threshold value, in the sense that only high-confidence detection (like 80% probability) is accounted for.
-In addition, heat-map is used to record multiple detections in an image, and only the "hot" parts of the map are where the cars are. Two threshold values for score and heat-map are applied to reject false positives, as chosen below:
+In addition, heat-map is used to record multiple detections in an image, and only the "hot" parts of the map are considered as high-confidence detections. Two threshold values for score and heat-map are chosen as follows:
 
 | Parameter   | Threshold  |
 |:-----------:|:----------:| 
@@ -137,7 +137,27 @@ Once a thresholded heat-map is obtained, I use `scipy.ndimage.measurements.label
 
 The code for this step is contained in the code cells [13]-[16] of [`Vehicle Detection.ipynb`](https://github.com/YuxingLiu/CarND-Vehicle-Detection/blob/master/Vehicle%20Detection.ipynb).  
 
+Similar to the [Lane Finding Project](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines), a `Vehicle()` class was defined to improve the robustness of the vehicle detection algorithm, by enabling the following methods:
+1. Accumulate the heat-map over n past frames to get stable bounding boxes.
+2. Apply threshold to the accumulated heat-map to remove false positives.
+
+| Parameter     | Value |
+|:-------------:|:-----:| 
+| Num of frames | 15    |
+| Heat (video)  | 50    |
+
 Here's a link to [project video result](./test_videos_output/project_video.mp4).
 
 
 ## Discussion
+
+Although the linear SVM classifier yields very high test accuracy, its performance is not satisfactory in the project video. As the consequence, I have to implement several methods to reject the false positives, including:
+1. Use confidence scores instead of labels in each window search.
+2. Use a large number of frames and a high threshold value for accumulated heat-map.
+
+Perhaps, the most effective way to improve the performance of the classifier in the video, is to augment the training data by using the [Udacity dataset](https://github.com/udacity/self-driving-car/tree/master/annotations) and hard negative mining. It is also possible to use convolutional neural network to avoid such manual feature selection. However, I don't think CNN can perform better than linear SVC, if the training is not representative enough.
+
+Currently, the pipeline runs at 0.8 frames per second. To improve the computation speed, some improvements could be helpful:
+1. Vectorize the confidence scores prediction in every single scaled search window.
+2. Apply [principal component analysis](https://en.wikipedia.org/wiki/Principal_component_analysis) to remove the redundant features.
+3. Integrate the lane finding and vehicle detection algorithm to restrict the search region. For instance, if the vehicle is on the left lane (yellow line on right), only search for the right side of the yellow line. 
