@@ -160,4 +160,4 @@ Perhaps, the most effective way to improve the performance of the classifier in 
 Currently, the pipeline runs at 0.8 FPS. To improve the computation speed, some improvements could be helpful:
 1. Vectorize the confidence scores prediction.
 2. Apply [principal component analysis](https://en.wikipedia.org/wiki/Principal_component_analysis) to remove the redundant features.
-3. Integrate the lane finding and vehicle detection algorithm to restrict the search region. For instance, if the vehicle is on the left lane (yellow line on right), only search the right side of the yellow line.
+3. Integrate the lane finding and vehicle detection algorithm to restrict the search region. For instance, if the vehicle is on the left lane (solid yellow line on left), only search the right side of the yellow line.
