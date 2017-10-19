@@ -108,9 +108,9 @@ X_train, X_test, y_train, y_test = train_test_split(scaled_X, labels, test_size=
 
 where `stratify=labels` ensures that the ratios between cars and non-cars are the same in both training and test sets.
 
-A linear SVM classifier is built and trained using [`sklearn.svm.LinearSVC()`](http://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html). To tune the SVM with a linear kernel, I consider five possible values of the C parameter, and the results are summarized in the following table:
+A linear SVM classifier is built and trained using [`sklearn.svm.LinearSVC()`](http://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html). To tune the SVM with a linear kernel, I consider five possible values of the `C` parameter, and the results are summarized in the following table:
 
-| `C`   | Test accuracy [%]   | Training accuracy [%] | Training time [s] |
+| C     | Test accuracy [%]   | Training accuracy [%] | Training time [s] |
 |:-----:|:---------------:|:-----------------:|:-------------:| 
 | 1     | 98.85       | 100       | 25.9    | 
 | 0.1   | 98.85       | 100       | 26.1    |
@@ -118,7 +118,7 @@ A linear SVM classifier is built and trained using [`sklearn.svm.LinearSVC()`](h
 | 0.001 | 98.93       | 100       | 9.5     |
 | 0.0001| 98.82       | 99.63     | 4.9     |
 
-`C=0.001` is chosen so that the classifier is more generalizable. Having chosen the features and SVM hyperparameters, I retrained the classifier on the entire 17760 training samples, plus 1473 false positive samples. The retrainiing accuracy is above 99.99% under a large regularization term (`C=0.001`).
+`C=0.001` is chosen so that the classifier is more generalizable. Having chosen the features and SVM hyperparameters, I retrained the classifier on the entire 17760 training samples, plus 1473 false positive samples. Finally, 99.99% re-train accuracy is achieved under a large regularization term (`C=0.001`).
 
 ## HOG Sub-sampling Window Search
 
