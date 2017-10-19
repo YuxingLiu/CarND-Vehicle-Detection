@@ -108,11 +108,17 @@ X_train, X_test, y_train, y_test = train_test_split(scaled_X, labels, test_size=
 
 where `stratify=labels` ensures that the ratios between cars and non-cars are the same in both training and test sets.
 
-A linear SVM classifier is built and trained using [`sklearn.svm.LinearSVC()`](http://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html). To tune the SVM with a linear kernel, I consider three possible values of the C parameter, `C={1, 0.1, 0.01}`. It is found that both `C=1` and `C=0.1` yield above 99% test accuracy, while `C=0.01` is about 98.8%. Therefore, `C=0.1` is chosen so that the classifier is more generalizable.
+A linear SVM classifier is built and trained using [`sklearn.svm.LinearSVC()`](http://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html). To tune the SVM with a linear kernel, I consider five possible values of the C parameter, and the results are summarized in the following table:
 
-It's worth mentioning that 100% training accuracy can be achieve, indicating that 1346 features is enough to classify those 17700 samples perfectly. In other words, using 8460 features as mentioned in the lecture seems to be not helpful, because of such relatively small training set. Even though both cases exhibit high test accuracy, they reported a lot of false positives in the video. For this reason, I keep using the parameters corresponding to 1346 features, for faster computation speed.
+| `C`   | Test accuracy [%]   | Training accuracy [%] | Training time [s] |
+|:-----:|:---------------:|:-----------------:|:-------------:| 
+| 1     | 98.85       | 100       | 25.9    | 
+| 0.1   | 98.85       | 100       | 26.1    |
+| 0.01  | 98.87       | 100       | 26.6    |
+| 0.001 | 98.93       | 100       | 9.5     |
+| 0.0001| 98.82       | 99.63     | 4.9     |
 
-Having chosen the features and SVM hyperparameters, I decided to re-train the classifier on the entire 17760 samples, in order to fully utilize the small dataset. Hopefully, this move would not cause overfitting, since a relatively large regularization term is used (`C=0.1`).
+`C=0.001` is chosen so that the classifier is more generalizable. Having chosen the features and SVM hyperparameters, I retrained the classifier on the entire 17760 training samples, plus 1473 false positive samples. The retrainiing accuracy is above 99.99% under a large regularization term (`C=0.001`).
 
 ## HOG Sub-sampling Window Search
 
@@ -161,7 +167,7 @@ Eventually, I found that the following methods are quite effective to reject the
 1. Smaller `C` values for linear SVM classifier to prevent overfitting and to improve generalization. 
 2. Hard negative mining.
 3. Confidence scores instead of labels in each window search.
-4. Accumulated heat-map over several frames with relatively high threshold value.
+4. Multi-frame accumulated heat-map with relatively high threshold.
 
 One effective way to further improve the performance of the classifier is to augment the training data by using the [Udacity dataset](https://github.com/udacity/self-driving-car/tree/master/annotations). It is also possible to use convolutional neural network to avoid manual feature selection. 
 
