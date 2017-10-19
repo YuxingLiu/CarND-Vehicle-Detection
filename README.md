@@ -20,7 +20,8 @@ Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/5
 
 [//]: # (Image References)
 
-[image1]: ./output_images/example_car_noncar.png "Data Visualization"
+[image0]: ./output_images/example_car_noncar.png "Data Visualization"
+[image1]: ./output_images/false_positives.png "False Positives"
 [image2]: ./output_images/color_hist_car1.png "Color Histograms Car 1"
 [image3]: ./output_images/color_hist_car2.png "Color Histograms Car 2"
 [image4]: ./output_images/color_hist_noncar1.png "Color Histograms Not-car 1"
@@ -36,6 +37,7 @@ Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/5
 [image14]: ./output_images/search_heat1.png "Window Search 1"
 [image15]: ./output_images/search_heat2.png "Window Search 2"
 
+
 ---
 
 
@@ -46,6 +48,10 @@ Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/5
 The code for this step is in the notebook [`Load and Save Data.ipynb`](https://github.com/YuxingLiu/CarND-Vehicle-Detection/blob/master/Load%20and%20Save%20Data.ipynb).  
 
 For this project, a labeled dataset of 8792 [vehicles](https://s3.amazonaws.com/udacity-sdc/Vehicle_Tracking/vehicles_smallset.zip) and 8968 [non-vehicles](https://s3.amazonaws.com/udacity-sdc/Vehicle_Tracking/non-vehicles.zip) examples were used to train the classifier. These example images come from a combination of the [GTI vehicle image database](http://www.gti.ssr.upm.es/data/Vehicle_database.html), the [KITTI vision benchmark suite](http://www.cvlibs.net/datasets/kitti/), and examples extracted from the [project video](https://github.com/YuxingLiu/CarND-Vehicle-Detection/blob/master/project_video.mp4) itself. Here are several sample images in the vehicle and non-vehicle classes:
+
+![alt text][image0]
+
+To reject the false positives, hard negative mining was adopted. I collected 1473 [non-car images](https://github.com/YuxingLiu/CarND-Vehicle-Detection/blob/master/training_data/dataset_falsePos.p) from the project video, adding them to the training set and finally retraining the classifier. Here are several sample false positive images:
 
 ![alt text][image1]
 
@@ -146,7 +152,7 @@ Similar to the [Lane Finding Project](https://github.com/YuxingLiu/CarND-Advance
 | Num of frames | 15    |
 | Heat (video)  | 50    |
 
-Here's a link to [project video result](./test_videos_output/project_video.mp4).
+Here's a link to [project video result](./test_videos_output/project_video_v8.mp4).
 
 
 ## Discussion
